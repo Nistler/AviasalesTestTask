@@ -1,19 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 body {
   background: #F3F7FA;
+  margin: 0px;
 }
 
 .aviasales {
   font-family: Open Sanse;
   margin: auto;
-  width: 960px;
 }
 
 .logo {
   position: relative;
   top: 50px;
-  right: 450px;
+  right: calc(50% - 60px);
   width: 60px;
   height: 60px;
   float: right;
+}
+
+@media (max-width: 800px) {
+  .aviasales {
+    width: 530px;
+    display: flex;
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    position: initial;
+  }
 }
