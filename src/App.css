@@ -167,7 +167,7 @@ button:focus {
 .ticketsBlock{
   position: relative;
   top: 160px;
-  left: 20px;
+  padding-left: 20px;
 }
 
 .tickets {
@@ -216,20 +216,20 @@ button:focus {
 
   .ticketsBlock {
     top: 0px;
-    left: 0px;
+    padding-left: initial;
   }
 
   .mobileMenu {
     visibility: visible;
-    top: 12px;
+    top: 13px;
     width: 40px;
     height: 40px;
+    padding-bottom: 5px;
     background: #FFFFFF;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     text-align: center;
     font-size: 2.3em;
-    line-height: 1em;
     font-weight: 600;
     z-index: 2;
     transition: 0.2s;
@@ -270,7 +270,7 @@ button:focus {
 
   .mobileFilter {
     z-index: 1;
-    left: 14px;
+    left: initial;
     width: 232px;
     top: 45px;
     animation-duration: 0.2s;

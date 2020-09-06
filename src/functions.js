@@ -43,3 +43,26 @@ export const getTickets = async (url, arr) => {
 }
 
 export const generateKey = () => Math.random().toString(36).substr(2, 9);
+
+const applyFilters = (ticket, filters) => {
+    const { oneTransfer, twoTransfers, threeTransfers, without } = filters;
+    if (without && ticket.segments[0].stops.length === 0) {
+        return true;
+    } else if (oneTransfer && ticket.segments[0].stops.length === 1) {
+        return true;
+    } else if (twoTransfers && ticket.segments[0].stops.length === 2) {
+        return true;
+    } else if (threeTransfers && ticket.segments[0].stops.length === 3) {
+        return true;
+    } else if (!oneTransfer && !twoTransfers && !threeTransfers && !without) {
+        return true;
+    }
+    return false;
+}
+
+export const filtration = (tickets, filters) => {
+    const filtered = tickets
+      .filter((ticket) => applyFilters(ticket, filters))
+      .slice(0, 5);
+    return filtered;
+  }

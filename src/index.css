@@ -10,7 +10,7 @@ body {
 }
 
 .logo {
-  position: relative;
+  position: absolute;
   top: 50px;
   right: calc(50% - 60px);
   width: 60px;
