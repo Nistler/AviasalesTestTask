@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 body {
   background: #F3F7FA;
   margin: 0px;
@@ -11,16 +12,13 @@ body {
 
 .logo {
   position: absolute;
-  top: 50px;
+  top: 40px;
   right: calc(50% - 60px);
-  width: 60px;
-  height: 60px;
   float: right;
 }
 
 @media (max-width: 800px) {
   .aviasales {
-    width: 530px;
     display: flex;
     margin-top: 5px;
     flex-direction: column;
@@ -31,3 +29,4 @@ body {
     position: initial;
   }
 }
+
