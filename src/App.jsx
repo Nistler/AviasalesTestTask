@@ -29,18 +29,23 @@ export default class App extends Component {
 
   getRequest = async () => {
     this.setState({ isLoading: true });
-    const responseID = await fetch(
-      "https://front-test.beta.aviasales.ru/search"
-    );
-    const searchId = await responseID.json();
-    const url = `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.searchId}`;
-    const tickets = await getTickets(url, []);
-    console.log(tickets);
-    this.setState({
-      tickets,
-      ticketsForRender: tickets.slice(0, 5),
-      isLoading: false,
-    });
+    try {
+      const responseID = await fetch(
+        "https://front-test.beta.aviasales.ru/search"
+      );
+      console.log(responseID);
+      const searchId = await responseID.json();
+      const url = `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.searchId}`;
+      const tickets = await getTickets(url, []);
+      console.log(tickets);
+      this.setState({
+        tickets,
+        ticketsForRender: tickets.slice(0, 5),
+        isLoading: false,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   toggleMenu = () => {
