@@ -1,5 +1,24 @@
 import styled, { keyframes, css } from "styled-components";
 
+export const Aviasales = styled.div`
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 800px) {
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: center
+  }
+`;
+
+export const Logo = styled.img`
+  position: absolute;
+  top: 40px;
+  @media (max-width: 800px) {
+    position: initial;
+  }
+`;
+
 export const Title = styled.div`
   font-family: "Open Sans";
   font-style: normal;
@@ -76,9 +95,8 @@ export const CheckboxField = styled.div`
   padding-left: 20px;
   display: flex;
   align-items: center;
-  color: #4a4a4a;
+  color: ${({ disabled }) => disabled ? "#cecece !important" : "#4a4a4a !important"};
   &:hover {
-    transition-duration: 0.2s;
     background-color: #f1fcff;
   }
 `;
@@ -93,7 +111,8 @@ const Button = styled.button `
   line-height: 20px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: #4a4a4a;
+  color: ${({ disabled }) => disabled ? "#cecece !important" : "#4a4a4a"};
+  cursor: pointer;
   background: #ffffff;
   border: 1px solid #dfe5ec;
   box-sizing: border-box;

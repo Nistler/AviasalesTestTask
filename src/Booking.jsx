@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { getTickets, generateKey, filtration } from "./functions.js";
 import Ticket from "./Ticket.jsx";
+import aviasalesLogo from "./logo.svg";
 import {
+  Aviasales,
+  Logo,
   Title,
   Container,
   Label,
@@ -68,6 +71,9 @@ export default class Booking extends Component {
 
   handleCheckbox = ({ target }) => {
     const { filters, tickets } = this.state;
+    if (tickets === null) {
+      return;
+    }
     let newFilter;
     if (target.id === "all") {
       filters.all
@@ -98,6 +104,9 @@ export default class Booking extends Component {
 
   handleSort = ({ target }) => {
     const { tickets, filters, buttonsState } = this.state;
+    if (tickets === null) {
+      return;
+    }
     if (buttonsState === target.id) {
       this.setState({
         buttonsState: null,
@@ -129,86 +138,91 @@ export default class Booking extends Component {
       buttonsState,
     } = this.state;
     return (
-      <Container>
-        <MobileMenu isHidden={isMenuHiden} onClick={this.toggleMenu} />
-        <FilterBox isHidden={isMenuHiden}>
-          <Title>Количество пересадок</Title>
-          <form>
-            <CheckboxField>
-              <CustomCheckbox
-                id="all"
-                type="checkbox"
-                checked={filters.all}
-                onChange={this.handleCheckbox}
-              />
-              <Label htmlFor="all">Все</Label>
-            </CheckboxField>
-            <CheckboxField>
-              <CustomCheckbox
-                id="without"
-                type="checkbox"
-                checked={filters.without}
-                onChange={this.handleCheckbox}
-              />
-              <Label htmlFor="without">Без пересадок</Label>
-            </CheckboxField>
-            <CheckboxField>
-              <CustomCheckbox
-                id="oneTransfer"
-                type="checkbox"
-                checked={filters.oneTransfer}
-                onChange={this.handleCheckbox}
-              />
-              <Label htmlFor="oneTransfer">1 пересадка</Label>
-            </CheckboxField>
-            <CheckboxField>
-              <CustomCheckbox
-                id="twoTransfers"
-                type="checkbox"
-                checked={filters.twoTransfers}
-                onChange={this.handleCheckbox}
-              />
-              <Label htmlFor="twoTransfers">2 пересадки</Label>
-            </CheckboxField>
-            <CheckboxField>
-              <CustomCheckbox
-                id="threeTransfers"
-                type="checkbox"
-                checked={filters.threeTransfers}
-                onChange={this.handleCheckbox}
-              />
-              <Label htmlFor="threeTransfers">3 пересадки</Label>
-            </CheckboxField>
-          </form>
-        </FilterBox>
-        <TicketsBlock>
-          <Buttons>
-            <LeftButton
-              id="cheapest"
-              active={buttonsState}
-              onClick={this.handleSort}
-            >
-              Самый дешевый
-            </LeftButton>
-            <RightButton
-              id="fastest"
-              active={buttonsState}
-              onClick={this.handleSort}
-            >
-              Самый быстрый
-            </RightButton>
-          </Buttons>
-          <Tickets>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              ticketsForRender.map((ticket) => (
-                <Ticket key={generateKey()} ticket={ticket} />
-              ))
-            )}
-          </Tickets>
-        </TicketsBlock>
-      </Container>
+      <Aviasales>
+        <Logo src={aviasalesLogo} alt="Авиасейлс" className="logo" />
+        <Container>
+          <MobileMenu isHidden={isMenuHiden} onClick={this.toggleMenu} />
+          <FilterBox isHidden={isMenuHiden}>
+            <Title>Количество пересадок</Title>
+            <form>
+              <CheckboxField disabled={ticketsForRender === null}>
+                <CustomCheckbox
+                  id="all"
+                  type="checkbox"
+                  checked={filters.all}
+                  onChange={this.handleCheckbox}
+                />
+                <Label htmlFor="all">Все</Label>
+              </CheckboxField>
+              <CheckboxField CheckboxField disabled={ticketsForRender === null}>
+                <CustomCheckbox
+                  id="without"
+                  type="checkbox"
+                  checked={filters.without}
+                  onChange={this.handleCheckbox}
+                />
+                <Label htmlFor="without">Без пересадок</Label>
+              </CheckboxField>
+              <CheckboxField CheckboxField disabled={ticketsForRender === null}>
+                <CustomCheckbox
+                  id="oneTransfer"
+                  type="checkbox"
+                  checked={filters.oneTransfer}
+                  onChange={this.handleCheckbox}
+                />
+                <Label htmlFor="oneTransfer">1 пересадка</Label>
+              </CheckboxField>
+              <CheckboxField CheckboxField disabled={ticketsForRender === null}>
+                <CustomCheckbox
+                  id="twoTransfers"
+                  type="checkbox"
+                  checked={filters.twoTransfers}
+                  onChange={this.handleCheckbox}
+                />
+                <Label htmlFor="twoTransfers">2 пересадки</Label>
+              </CheckboxField>
+              <CheckboxField CheckboxField disabled={ticketsForRender === null}>
+                <CustomCheckbox
+                  id="threeTransfers"
+                  type="checkbox"
+                  checked={filters.threeTransfers}
+                  onChange={this.handleCheckbox}
+                />
+                <Label htmlFor="threeTransfers">3 пересадки</Label>
+              </CheckboxField>
+            </form>
+          </FilterBox>
+          <TicketsBlock>
+            <Buttons>
+              <LeftButton
+                id="cheapest"
+                active={buttonsState}
+                onClick={this.handleSort}
+                disabled={ticketsForRender === null}
+              >
+                Самый дешевый
+              </LeftButton>
+              <RightButton
+                id="fastest"
+                active={buttonsState}
+                onClick={this.handleSort}
+                disabled={ticketsForRender === null}
+              >
+                Самый быстрый
+              </RightButton>
+            </Buttons>
+            <Tickets>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                ticketsForRender.map((ticket) => (
+                  <Ticket key={generateKey()} ticket={ticket} />
+                ))
+              )}
+            </Tickets>
+          </TicketsBlock>
+        </Container>
+      </Aviasales>
     );
   }
 }
