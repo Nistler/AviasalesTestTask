@@ -40,6 +40,7 @@ export default class Booking extends Component {
   }
 
   componentDidMount() {
+    // request tickets
     this.getRequest();
   }
 
@@ -49,11 +50,9 @@ export default class Booking extends Component {
       const responseID = await fetch(
         "https://front-test.beta.aviasales.ru/search"
       );
-      console.log(responseID);
       const searchId = await responseID.json();
       const url = `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.searchId}`;
       const tickets = await getTickets(url, []);
-      console.log(tickets);
       this.setState({
         tickets,
         ticketsForRender: tickets.slice(0, 5),
@@ -64,11 +63,13 @@ export default class Booking extends Component {
     }
   };
 
+  // toggle mobile menu
   toggleMenu = () => {
     const { isMenuHiden } = this.state;
     this.setState({ isMenuHiden: !isMenuHiden });
   };
 
+  // control and application of filters
   handleCheckbox = ({ target }) => {
     const { filters, tickets } = this.state;
     if (tickets === null) {
@@ -102,6 +103,7 @@ export default class Booking extends Component {
     });
   };
 
+  // sort buttons control, sorting application
   handleSort = ({ target }) => {
     const { tickets, filters, buttonsState } = this.state;
     if (tickets === null) {
@@ -139,7 +141,7 @@ export default class Booking extends Component {
     } = this.state;
     return (
       <Aviasales>
-        <Logo src={aviasalesLogo} alt="Авиасейлс" className="logo" />
+        <Logo src={aviasalesLogo} alt="Авиасейлс" />
         <Container>
           <MobileMenu isHidden={isMenuHiden} onClick={this.toggleMenu} />
           <FilterBox isHidden={isMenuHiden}>
