@@ -1,10 +1,23 @@
 import React, { Component } from "react";
-import classNames from "classnames";
 import { getTickets, generateKey, filtration } from "./functions.js";
-import "./App.css";
 import Ticket from "./Ticket.jsx";
+import {
+  Title,
+  Container,
+  Label,
+  TicketsBlock,
+  Tickets,
+  Buttons,
+  Loader,
+  CheckboxField,
+  RightButton,
+  LeftButton,
+  FilterBox,
+  MobileMenu,
+  CustomCheckbox,
+} from "./styles/BookingStyles.js";
 
-export default class App extends Component {
+export default class Booking extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,106 +128,87 @@ export default class App extends Component {
       filters,
       buttonsState,
     } = this.state;
-    const mobileFilter = classNames({
-      filter: true,
-      mobileFilter: !isMenuHiden,
-    });
-
-    const mobileMenu = classNames({
-      mobileMenu: true,
-      mobileMenuOpened: !isMenuHiden,
-    });
-
-    const leftButton = classNames({
-      leftButton: true,
-      active: buttonsState === "cheapest",
-    });
-
-    const rightButton = classNames({
-      rightButton: true,
-      active: buttonsState === "fastest",
-    });
     return (
-      <div id="container">
-        <button className={mobileMenu} onClick={this.toggleMenu}></button>
-        <div className={mobileFilter}>
-          <div className="title">Количество пересадок</div>
-          <form className="checkboxes">
-            <div className="checkboxField">
-              <input
+      <Container>
+        <MobileMenu isHidden={isMenuHiden} onClick={this.toggleMenu} />
+        <FilterBox isHidden={isMenuHiden}>
+          <Title>Количество пересадок</Title>
+          <form>
+            <CheckboxField>
+              <CustomCheckbox
                 id="all"
                 type="checkbox"
                 checked={filters.all}
                 onChange={this.handleCheckbox}
               />
-              <label htmlFor="all">Все</label>
-            </div>
-            <div className="checkboxField">
-              <input
+              <Label htmlFor="all">Все</Label>
+            </CheckboxField>
+            <CheckboxField>
+              <CustomCheckbox
                 id="without"
                 type="checkbox"
                 checked={filters.without}
                 onChange={this.handleCheckbox}
               />
-              <label htmlFor="without">Без пересадок</label>
-            </div>
-            <div className="checkboxField">
-              <input
+              <Label htmlFor="without">Без пересадок</Label>
+            </CheckboxField>
+            <CheckboxField>
+              <CustomCheckbox
                 id="oneTransfer"
                 type="checkbox"
                 checked={filters.oneTransfer}
                 onChange={this.handleCheckbox}
               />
-              <label htmlFor="oneTransfer">1 пересадка</label>
-            </div>
-            <div className="checkboxField">
-              <input
+              <Label htmlFor="oneTransfer">1 пересадка</Label>
+            </CheckboxField>
+            <CheckboxField>
+              <CustomCheckbox
                 id="twoTransfers"
                 type="checkbox"
                 checked={filters.twoTransfers}
                 onChange={this.handleCheckbox}
               />
-              <label htmlFor="twoTransfers">2 пересадки</label>
-            </div>
-            <div className="checkboxField">
-              <input
+              <Label htmlFor="twoTransfers">2 пересадки</Label>
+            </CheckboxField>
+            <CheckboxField>
+              <CustomCheckbox
                 id="threeTransfers"
                 type="checkbox"
                 checked={filters.threeTransfers}
                 onChange={this.handleCheckbox}
               />
-              <label htmlFor="threeTransfers">3 пересадки</label>
-            </div>
+              <Label htmlFor="threeTransfers">3 пересадки</Label>
+            </CheckboxField>
           </form>
-        </div>
-        <div className="ticketsBlock">
-          <div className="buttons">
-            <button
+        </FilterBox>
+        <TicketsBlock>
+          <Buttons>
+            <LeftButton
               id="cheapest"
-              className={leftButton}
+              active={buttonsState}
               onClick={this.handleSort}
             >
               Самый дешевый
-            </button>
-            <button
+            </LeftButton>
+            <RightButton
               id="fastest"
-              className={rightButton}
+              active={buttonsState}
               onClick={this.handleSort}
             >
               Самый быстрый
-            </button>
-          </div>
-          <div className="tickets">
+            </RightButton>
+          </Buttons>
+          <Tickets>
             {isLoading ? (
-              <div className="donut"></div>
+              <Loader />
             ) : (
               ticketsForRender.map((ticket) => (
                 <Ticket key={generateKey()} ticket={ticket} />
               ))
             )}
-          </div>
-        </div>
-      </div>
+          </Tickets>
+        </TicketsBlock>
+      </Container>
     );
   }
 }
