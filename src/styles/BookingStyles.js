@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
+import customCursor from "./cursor.svg";
 
 export const Aviasales = styled.div`
   margin: auto;
@@ -112,7 +113,7 @@ const Button = styled.button `
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: ${({ disabled }) => disabled ? "#cecece !important" : "#4a4a4a"};
-  cursor: pointer;
+  cursor: url(${customCursor}), pointer;
   background: #ffffff;
   border: 1px solid #dfe5ec;
   box-sizing: border-box;
@@ -234,7 +235,7 @@ export const CustomCheckbox = styled.input`
     padding-left: 28px;
     line-height: 40px;
     width: 180px;
-    cursor: pointer;
+    cursor: url(${customCursor}), pointer;
   }
 
   &:checked + label:before,
