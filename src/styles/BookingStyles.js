@@ -8,7 +8,7 @@ export const Aviasales = styled.div`
   @media (max-width: 800px) {
     margin-top: 5px;
     flex-direction: column;
-    align-items: center
+    align-items: center;
   }
 `;
 
@@ -80,7 +80,6 @@ const donutSpin = keyframes`
   }
 `;
 
-
 export const Loader = styled.div`
   display: inline-block;
   border: 4px solid rgba(0, 0, 0, 0.1);
@@ -96,13 +95,14 @@ export const CheckboxField = styled.div`
   padding-left: 20px;
   display: flex;
   align-items: center;
-  color: ${({ disabled }) => disabled ? "#cecece !important" : "#4a4a4a !important"};
+  color: ${({ disabled }) =>
+    disabled ? "#cecece !important" : "#4a4a4a !important"};
   &:hover {
     background-color: #f1fcff;
   }
 `;
 
-const Button = styled.button `
+const Button = styled.button`
   width: 252px;
   height: 50px;
   font-family: "Open Sans";
@@ -112,7 +112,7 @@ const Button = styled.button `
   line-height: 20px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: ${({ disabled }) => disabled ? "#cecece !important" : "#4a4a4a"};
+  color: ${({ disabled }) => (disabled ? "#cecece !important" : "#4a4a4a")};
   cursor: url(${customCursor}), pointer;
   background: #ffffff;
   border: 1px solid #dfe5ec;
@@ -125,24 +125,24 @@ const Button = styled.button `
     -moz-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
   &:focus {
-    outline-style: solid;
-    outline-color: transparent;
-    border: 1px solid #2196f3;
+    outline-style: none;
+    border: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 `;
 
 export const LeftButton = styled(Button)`
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  background: ${({ id, active }) => id === active ? "#2196f3" : "#ffffff"};
-  color: ${({ id, active }) => id === active ? "#ffffff" : "#4a4a4a"};
+  background: ${({ id, active }) => (id === active ? "#2196f3" : "#ffffff")};
+  color: ${({ id, active }) => (id === active ? "#ffffff" : "#4a4a4a")};
 `;
 
 export const RightButton = styled(Button)`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: ${({ id, active }) => id === active ? "#2196f3" : "#ffffff"};
-  color: ${({ id, active }) => id === active ? "#ffffff" : "#4a4a4a"};
+  background: ${({ id, active }) => (id === active ? "#2196f3" : "#ffffff")};
+  color: ${({ id, active }) => (id === active ? "#ffffff" : "#4a4a4a")};
 `;
 
 const rollIn = keyframes`
@@ -170,8 +170,13 @@ export const FilterBox = styled.div`
   border-radius: 5px;
   @media (max-width: 800px) {
     position: absolute;
-    visibility: ${({ isHidden }) => isHidden ? 'hidden' : 'visible'};
-    animation: ${({ isHidden }) => isHidden ? '' : css`${rollIn} 0.5s ease-in-out`};
+    visibility: ${({ isHidden }) => (isHidden ? "hidden" : "visible")};
+    animation: ${({ isHidden }) =>
+      isHidden
+        ? ""
+        : css`
+            ${rollIn} 0.5s ease-in-out
+          `};
     z-index: 1;
     left: initial;
     top: 45px;
@@ -182,13 +187,14 @@ export const FilterBox = styled.div`
 export const MobileMenu = styled.button`
   position: absolute;
   visibility: hidden;
+  cursor: url(${customCursor}), pointer;
   &:focus {
-    outline-style: solid;
-    outline-color: transparent;
-    border: 1px solid #2196f3;
+    outline-style: none;
+    border: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
   &:after {
-    content: '≡';
+    content: "≡";
   }
   @media (max-width: 800px) {
     visibility: visible;
@@ -196,11 +202,11 @@ export const MobileMenu = styled.button`
     line-height: 20px;
     border: 1px solid #dfe5ec;
     top: 13px;
-    width: ${({ isHidden }) => isHidden ? '40px' : '234px'};
+    width: ${({ isHidden }) => (isHidden ? "40px" : "234px")};
     height: 40px;
     padding-bottom: 5px;
-    background: ${({ isHidden }) => isHidden ? '#ffffff' : '#2196f3'};
-    color: ${({ isHidden }) => isHidden ? '#4a4a4a' : '#ffffff'};
+    background: ${({ isHidden }) => (isHidden ? "#ffffff" : "#2196f3")};
+    color: ${({ isHidden }) => (isHidden ? "#4a4a4a" : "#ffffff")};
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     text-align: center;
@@ -223,7 +229,7 @@ export const CustomCheckbox = styled.input`
   &:not(:checked) + label:after {
     opacity: 0;
   }
-  
+
   &:checked + label:after {
     opacity: 1;
   }
@@ -240,36 +246,42 @@ export const CustomCheckbox = styled.input`
 
   &:checked + label:before,
   &:not(:checked) + label:before {
-  content: "";
-  position: absolute;
-  left: 0px;
-  top: 10px;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #2196f3;
-  box-sizing: border-box;
-  border-radius: 2px;
-}
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #2196f3;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
 
-&:checked + label:after,
-&:not(:checked) + label:after {
-  content: "";
-  position: absolute;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-  left: 5px;
-  top: 15px;
-  width: 9px;
-  height: 5px;
-  border-radius: 1px;
-  border-left: 2px solid #2196f3;
-  border-bottom: 2px solid #2196f3;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
+  &:checked + label:after,
+  &:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    left: 5px;
+    top: 15px;
+    width: 9px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 2px solid #2196f3;
+    border-bottom: 2px solid #2196f3;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  &:focus + label:before {
+    outline-style: solid;
+    outline-color: transparent;
+    border: 1px solid #2196f3;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
 `;

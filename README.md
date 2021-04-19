@@ -23,7 +23,7 @@ Short description:
 
 ```
 $ git clone https://github.com/Nistler/AviasalesTestTask
-$ cd gallery
+$ cd AviasalesTestTask
 $ npm install
 $ npm start
 ```

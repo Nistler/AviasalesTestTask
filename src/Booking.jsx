@@ -26,9 +26,11 @@ export default class Booking extends Component {
     this.state = {
       tickets: null,
       ticketsForRender: null,
-      isLoading: true,
-      isMenuHiden: true,
-      buttonsState: null,
+      uiState: {
+        isLoading: true,
+        isMenuHiden: true,
+        buttonsState: null,
+      },
       filters: {
         oneTransfer: false,
         twoTransfers: false,
@@ -45,7 +47,8 @@ export default class Booking extends Component {
   }
 
   getRequest = async () => {
-    this.setState({ isLoading: true });
+    const { uiState } = this.state;
+    this.setState({ uiState: { ...uiState, isLoading: true } });
     try {
       const responseID = await fetch(
         "https://front-test.beta.aviasales.ru/search"
@@ -56,7 +59,7 @@ export default class Booking extends Component {
       this.setState({
         tickets,
         ticketsForRender: tickets.slice(0, 5),
-        isLoading: false,
+        uiState: { ...uiState, isLoading: false },
       });
     } catch (err) {
       console.log(err);
@@ -65,13 +68,15 @@ export default class Booking extends Component {
 
   // toggle mobile menu
   toggleMenu = () => {
-    const { isMenuHiden } = this.state;
-    this.setState({ isMenuHiden: !isMenuHiden });
+    const { uiState } = this.state;
+    this.setState({
+      uiState: { ...uiState, isMenuHiden: !uiState.isMenuHiden },
+    });
   };
 
   // control and application of filters
   handleCheckbox = ({ target }) => {
-    const { filters, tickets } = this.state;
+    const { filters, tickets, uiState } = this.state;
     if (tickets === null) {
       return;
     }
@@ -99,19 +104,19 @@ export default class Booking extends Component {
     this.setState({
       filters: { ...filters, ...newFilter },
       ticketsForRender: filtered,
-      buttonsState: null,
+      uiState: { ...uiState, buttonsState: null },
     });
   };
 
   // sort buttons control, sorting application
   handleSort = ({ target }) => {
-    const { tickets, filters, buttonsState } = this.state;
+    const { tickets, filters, uiState } = this.state;
     if (tickets === null) {
       return;
     }
-    if (buttonsState === target.id) {
+    if (uiState.buttonsState === target.id) {
       this.setState({
-        buttonsState: null,
+        uiState: { ...uiState, buttonsState: null },
         ticketsForRender: tickets.slice(0, 5),
       });
       return;
@@ -127,24 +132,21 @@ export default class Booking extends Component {
     const newButtonsState = target.id === "cheapest" ? "cheapest" : "fastest";
     this.setState({
       ticketsForRender: filtered,
-      buttonsState: newButtonsState,
+      uiState: { ...uiState, buttonsState: newButtonsState },
     });
   };
 
   render() {
-    const {
-      ticketsForRender,
-      isLoading,
-      isMenuHiden,
-      filters,
-      buttonsState,
-    } = this.state;
+    const { ticketsForRender, uiState, filters } = this.state;
     return (
       <Aviasales>
         <Logo src={aviasalesLogo} alt="Авиасейлс" />
         <Container>
-          <MobileMenu isHidden={isMenuHiden} onClick={this.toggleMenu} />
-          <FilterBox isHidden={isMenuHiden}>
+          <MobileMenu
+            isHidden={uiState.isMenuHiden}
+            onClick={this.toggleMenu}
+          />
+          <FilterBox isHidden={uiState.isMenuHiden}>
             <Title>Количество пересадок</Title>
             <form>
               <CheckboxField disabled={ticketsForRender === null}>
@@ -198,7 +200,7 @@ export default class Booking extends Component {
             <Buttons>
               <LeftButton
                 id="cheapest"
-                active={buttonsState}
+                active={uiState.buttonsState}
                 onClick={this.handleSort}
                 disabled={ticketsForRender === null}
               >
@@ -206,7 +208,7 @@ export default class Booking extends Component {
               </LeftButton>
               <RightButton
                 id="fastest"
-                active={buttonsState}
+                active={uiState.buttonsState}
                 onClick={this.handleSort}
                 disabled={ticketsForRender === null}
               >
@@ -214,7 +216,7 @@ export default class Booking extends Component {
               </RightButton>
             </Buttons>
             <Tickets>
-              {isLoading ? (
+              {uiState.isLoading ? (
                 <Loader />
               ) : (
                 ticketsForRender.map((ticket) => (
