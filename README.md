@@ -1,3 +1,5 @@
+![alt text](https://img.shields.io/badge/coverage-94%25-brightgreen "code coverage")
+
 # Flight list
 
 ---
