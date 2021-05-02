@@ -32,7 +32,7 @@ export const Title = styled.div`
   color: #4a4a4a;
 `;
 
-export const Container = styled.div`
+export const Container = styled.main`
   display: flex;
   justify-content: center;
 
@@ -49,7 +49,7 @@ export const Label = styled.label`
   line-height: 20px;
 `;
 
-export const TicketsBlock = styled.div`
+export const TicketsBlock = styled.section`
   position: relative;
   top: 160px;
   padding-left: 20px;
@@ -60,14 +60,14 @@ export const TicketsBlock = styled.div`
   }
 `;
 
-export const Tickets = styled.div`
+export const Tickets = styled.section`
   margin-top: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
 `;
 
-export const Buttons = styled.div`
+export const Buttons = styled.section`
   width: 504px;
 `;
 
@@ -160,7 +160,7 @@ const rollIn = keyframes`
   }
 `;
 
-export const FilterBox = styled.div`
+export const FilterBox = styled.aside`
   position: relative;
   top: 160px;
   width: 232px;

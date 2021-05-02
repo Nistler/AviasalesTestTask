@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Ticket = styled.div`
+export const Ticket = styled.article`
   height: 184px;
   margin-bottom: 20px;
   background: #ffffff;

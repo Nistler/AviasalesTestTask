@@ -16,6 +16,7 @@ backup
 .env
 .DS_Store
 .vscode/
+.idea
 .vscode/settings.json
 .env.local
 .env.development.local
